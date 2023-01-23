@@ -4,7 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.anushka.rxdemo1.databinding.ActivityMainBinding
 import com.anushka.rxdemo1.react.ReactiveSetup
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,7 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         setupObservers().doOnNext {
             viewBasedBinding.tvGreeting.text = it
-        }.subscribe()
+        }
+//            .subscribeOn(Schedulers.io())                 // setup in respective module
+//            .observeOn(AndroidSchedulers.mainThread())    // setup in respective module
+            .subscribe()
 
     }
 

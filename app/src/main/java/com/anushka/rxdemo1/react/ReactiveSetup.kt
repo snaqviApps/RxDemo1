@@ -1,9 +1,12 @@
 package com.anushka.rxdemo1.react
 
 import android.util.Log
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class ReactiveSetup {
 
@@ -14,6 +17,10 @@ class ReactiveSetup {
             _firstObservable = Observable.just(greeting)
             observer = setObserver()
             _firstObservable.subscribe(observer)
+            _firstObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+
+
         }
 
         companion object {
